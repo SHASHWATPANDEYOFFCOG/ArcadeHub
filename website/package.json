@@ -1,0 +1,13 @@
+{
+  "name": "arcade-hub",
+  "version": "1.0.0",
+  "description": "A small gaming website (Chess + 3D Rubik's Cube) with an in-memory leaderboard.",
+  "main": "server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}

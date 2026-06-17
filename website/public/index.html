@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arcade Hub</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">Arcade<span>Hub</span></div>
+    <nav class="nav">
+      <a href="/" class="active">Home</a>
+      <a href="/chess.html">Chess</a>
+      <a href="/rubik.html">Rubik's Cube</a>
+    </nav>
+    <div class="player-box" id="player-box"></div>
+  </header>
+
+  <div class="container">
+    <section class="hero">
+      <h1>Play. Compete. Climb the board.</h1>
+      <p>Two classic games, one hub. Your scores land on the live leaderboard.</p>
+    </section>
+
+    <div class="grid">
+      <div class="card">
+        <div class="emoji">♟️</div>
+        <h3>Chess</h3>
+        <p>Full rules with castling, en passant &amp; promotion. Play a friend or challenge the computer at three difficulty levels.</p>
+        <a class="btn" href="/chess.html">Play Chess</a>
+      </div>
+      <div class="card">
+        <div class="emoji">🧩</div>
+        <h3>3D Rubik's Cube</h3>
+        <p>An interactive 3D cube. Scramble it, race the clock to solve, and post your best time.</p>
+        <a class="btn" href="/rubik.html">Play Cube</a>
+      </div>
+    </div>
+
+    <h2 class="section-title">🏆 Leaderboards</h2>
+    <div class="boards" id="boards">
+      <p class="muted">Loading…</p>
+    </div>
+  </div>
+
+  <script type="module">
+    import { fetchAllBoards, mountPlayerBox, getPlayerName } from '/js/api.js';
+    mountPlayerBox();
+
+    function render(data) {
+      const wrap = document.getElementById('boards');
+      const me = getPlayerName();
+      wrap.innerHTML = '';
+      for (const [game, meta] of Object.entries(data.games)) {
+        const board = data.boards[game] || [];
+        const rows = board.map((e, i) => `
+          <li class="${e.name === me ? 'you' : ''}">
+            <span class="rank">${i + 1}</span>
+            <span class="name">${escapeHtml(e.name)}</span>
+            <span class="score">${e.score} ${meta.unit}</span>
+          </li>`).join('') || '<li class="muted">No scores yet</li>';
+        wrap.insertAdjacentHTML('beforeend', `
+          <div class="board">
+            <h4>${meta.label} <small>${meta.order === 'asc' ? 'fastest' : 'top points'}</small></h4>
+            <ol>${rows}</ol>
+          </div>`);
+      }
+    }
+    function escapeHtml(s) {
+      return s.replace(/[&<>"']/g, (c) => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
+    }
+    fetchAllBoards().then(render).catch(() => {
+      document.getElementById('boards').innerHTML = '<p class="muted">Leaderboard unavailable.</p>';
+    });
+  </script>
+</body>
+</html>

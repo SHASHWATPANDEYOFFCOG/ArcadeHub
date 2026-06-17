@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chess · Arcade Hub</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">Arcade<span>Hub</span></div>
+    <nav class="nav">
+      <a href="/">Home</a>
+      <a href="/chess.html" class="active">Chess</a>
+      <a href="/rubik.html">Rubik's Cube</a>
+    </nav>
+    <div class="player-box" id="player-box"></div>
+  </header>
+
+  <div class="container">
+    <div class="game-wrap">
+      <div id="chessboard"></div>
+
+      <div class="panel">
+        <h3>Chess</h3>
+        <div class="status" id="status"></div>
+        <div class="controls">
+          <button class="btn" id="toggle-ai">Toggle Computer</button>
+          <button class="btn secondary" id="undo">Undo</button>
+          <button class="btn secondary" id="new">New Game</button>
+        </div>
+        <div class="controls">
+          <button class="btn secondary" data-diff="1">Easy</button>
+          <button class="btn secondary" data-diff="2">Medium</button>
+          <button class="btn secondary" data-diff="3">Hard</button>
+        </div>
+        <p class="muted">Mode: <b id="mode"></b></p>
+        <p class="muted" style="margin-top:12px">
+          Click a piece, then a highlighted square. Toggle the computer to let it
+          take the side not to move. Beat it to score points on the leaderboard
+          (harder = more points). Pawns auto-promote to a queen.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/js/chess.js"></script>
+</body>
+</html>

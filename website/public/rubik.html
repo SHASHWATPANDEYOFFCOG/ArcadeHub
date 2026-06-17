@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rubik's Cube · Arcade Hub</title>
+  <link rel="stylesheet" href="/css/style.css" />
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+    }
+  }
+  </script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">Arcade<span>Hub</span></div>
+    <nav class="nav">
+      <a href="/">Home</a>
+      <a href="/chess.html">Chess</a>
+      <a href="/rubik.html" class="active">Rubik's Cube</a>
+    </nav>
+    <div class="player-box" id="player-box"></div>
+  </header>
+
+  <div class="container">
+    <div class="game-wrap">
+      <canvas id="rubik-canvas"></canvas>
+
+      <div class="panel">
+        <h3>3D Rubik's Cube</h3>
+        <div class="timer" id="timer">0.0s</div>
+        <p class="muted" style="margin:6px 0 16px">Timer starts when you scramble, stops when solved.</p>
+
+        <div class="controls">
+          <button class="btn" id="scramble">Scramble</button>
+          <button class="btn secondary" id="solve">Solve</button>
+          <button class="btn secondary" id="reset">Reset</button>
+        </div>
+
+        <p class="muted">Face turns (click or press the key):</p>
+        <div class="controls">
+          <button class="btn secondary" data-move="U">U</button>
+          <button class="btn secondary" data-move="D">D</button>
+          <button class="btn secondary" data-move="L">L</button>
+          <button class="btn secondary" data-move="R">R</button>
+          <button class="btn secondary" data-move="F">F</button>
+          <button class="btn secondary" data-move="B">B</button>
+        </div>
+        <div class="controls">
+          <button class="btn secondary" data-move="U'">U'</button>
+          <button class="btn secondary" data-move="D'">D'</button>
+          <button class="btn secondary" data-move="L'">L'</button>
+          <button class="btn secondary" data-move="R'">R'</button>
+          <button class="btn secondary" data-move="F'">F'</button>
+          <button class="btn secondary" data-move="B'">B'</button>
+        </div>
+        <p class="muted" style="margin-top:12px">
+          Drag to rotate the view. Keys <span class="keycap">U D L R F B</span>
+          turn faces; hold <span class="keycap">Shift</span> for the reverse
+          direction. "Solve" replays your moves backwards.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/js/rubik.js"></script>
+</body>
+</html>
